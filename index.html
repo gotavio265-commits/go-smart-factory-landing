@@ -564,10 +564,11 @@
     .dash{transform:none;max-width:600px;width:100%;margin:0 auto}
     /* backdrop-filter + animação de transform trava/treme em GPUs de celular
        mais fracas — mantém o efeito flutuante só no desktop (ver regra >1024px).
-       top reduzido de -46px pra -20px: no desktop esse valor cria respiro em
-       relação ao card; empilhado no mobile, o mesmo valor deixava o card quase
-       colado no texto de confiança (hero-trust) logo acima. */
-    .dash-callout{top:-20px;right:6px;animation:none;transform:none;backdrop-filter:none;background:rgba(8,18,38,.98)}
+       top calibrado pra caber inteiro no espaço entre o texto de confiança
+       (hero-trust) e o topo do card — nem colado em cima, nem invadindo o
+       card e sobrepondo o badge "AO VIVO" (ver histórico: -46px grudava no
+       texto de cima, -20px invadia o card por baixo). */
+    .dash-callout{top:-72px;right:6px;animation:none;transform:none;backdrop-filter:none;background:rgba(8,18,38,.98)}
     .solution-grid{gap:40px}
     .benefits,.features,.pains{grid-template-columns:repeat(2,1fr)}
     .steps{grid-template-columns:repeat(2,1fr);gap:36px 0}
