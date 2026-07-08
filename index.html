@@ -316,7 +316,7 @@
   .drow.setup{border-left-color:var(--warning)}
   .drow.stop{border-left-color:var(--danger)}
   .drow .m{font-weight:700;min-width:74px}
-  .drow .s{color:var(--faint);font-size:12px;flex:1}
+  .drow .s{color:var(--faint);font-size:12px;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .drow .t{font-family:var(--font-num);font-weight:600;color:var(--muted)}
   .drow .st{
     font-size:10.5px;font-weight:700;padding:3px 10px;border-radius:99px;
@@ -564,11 +564,18 @@
     .dash{transform:none;max-width:600px;width:100%;margin:0 auto}
     /* backdrop-filter + animação de transform trava/treme em GPUs de celular
        mais fracas — mantém o efeito flutuante só no desktop (ver regra >1024px).
-       top calibrado pra caber inteiro no espaço entre o texto de confiança
-       (hero-trust) e o topo do card — nem colado em cima, nem invadindo o
-       card e sobrepondo o badge "AO VIVO" (ver histórico: -46px grudava no
-       texto de cima, -20px invadia o card por baixo). */
-    .dash-callout{top:-72px;right:6px;animation:none;transform:none;backdrop-filter:none;background:rgba(8,18,38,.98)}
+       Depois de duas tentativas com top:-Npx calibrado por pixel (grudava ora
+       no texto de cima, ora no badge "AO VIVO" de baixo, porque a quebra de
+       linha real do hero-trust varia por aparelho/fonte e não bate com o que
+       o teste automatizado simula) — solução definitiva: tira o card da
+       posição absoluta/flutuante e coloca no fluxo normal, como 1º elemento
+       dentro do próprio card, sempre acima do "Painel OEE" sem depender de
+       nenhum cálculo de pixel contra o texto acima. */
+    .dash-callout{
+      position:static;display:block;width:fit-content;margin:0 0 14px;
+      animation:none;transform:none;backdrop-filter:none;background:rgba(127,208,255,.1);
+      border-color:rgba(127,208,255,.3);
+    }
     .solution-grid{gap:40px}
     .benefits,.features,.pains{grid-template-columns:repeat(2,1fr)}
     .steps{grid-template-columns:repeat(2,1fr);gap:36px 0}
@@ -586,6 +593,11 @@
     .dash-oee{grid-template-columns:1fr;justify-items:center;text-align:center}
     .form-card{padding:26px}
     .foot-grid{flex-direction:column}
+  }
+  @media (max-width:340px){
+    .drow{gap:8px;padding:11px 10px}
+    .drow .m{min-width:60px}
+    .btn{white-space:normal;text-align:center}
   }
   </style>
 </head>
