@@ -298,11 +298,12 @@
   .ring-center .lbl{font-size:10px;font-weight:700;letter-spacing:.14em;color:var(--faint);margin-top:3px}
   .dash-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
   .dkpi{
+    min-width:0;
     background:var(--surface);border:1px solid var(--border);
     border-radius:var(--radius-sm);padding:12px 13px;
   }
-  .dkpi .l{font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
-  .dkpi .v{font-family:var(--font-num);font-size:23px;font-weight:700;margin-top:2px}
+  .dkpi .l{display:block;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .dkpi .v{display:block;font-family:var(--font-num);font-size:23px;font-weight:700;margin-top:2px}
   .dkpi .v.g{color:var(--success)} .dkpi .v.y{color:var(--warning)} .dkpi .v.c{color:var(--cyan)}
   /* linhas de postos */
   .dash-rows{display:flex;flex-direction:column;gap:8px}
@@ -561,7 +562,9 @@
     .hero-grid > *,.solution-grid > *,.compare-grid > *,.final-grid > *{min-width:0}
     .hero-grid{gap:48px}
     .dash{transform:none;max-width:600px;width:100%;margin:0 auto}
-    .dash-callout{right:6px}
+    /* backdrop-filter + animação de transform trava/treme em GPUs de celular
+       mais fracas — mantém o efeito flutuante só no desktop (ver regra >1024px) */
+    .dash-callout{right:6px;animation:none;transform:none;backdrop-filter:none;background:rgba(8,18,38,.98)}
     .solution-grid{gap:40px}
     .benefits,.features,.pains{grid-template-columns:repeat(2,1fr)}
     .steps{grid-template-columns:repeat(2,1fr);gap:36px 0}
