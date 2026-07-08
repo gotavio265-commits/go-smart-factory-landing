@@ -55,10 +55,29 @@
   }
   </script>
 
-  <!-- ══════════════ FONTES ══════════════ -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+  <!-- ══════════════ FONTES (self-hosted — sem dependência de fonts.googleapis.com) ══════════════ -->
+  <!-- Plus Jakarta Sans é servida pelo Google como fonte variável (um único arquivo
+       cobre os pesos 400–800); Rajdhani só existe em cortes estáticos por peso. -->
+  <link rel="preload" href="/fonts/plus-jakarta-sans-variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/rajdhani-700.woff2" as="font" type="font/woff2" crossorigin>
+  <style>
+  @font-face{
+    font-family:'Plus Jakarta Sans';font-style:normal;font-weight:400 800;font-display:swap;
+    src:url('/fonts/plus-jakarta-sans-variable.woff2') format('woff2');
+  }
+  @font-face{
+    font-family:'Rajdhani';font-style:normal;font-weight:500;font-display:swap;
+    src:url('/fonts/rajdhani-500.woff2') format('woff2');
+  }
+  @font-face{
+    font-family:'Rajdhani';font-style:normal;font-weight:600;font-display:swap;
+    src:url('/fonts/rajdhani-600.woff2') format('woff2');
+  }
+  @font-face{
+    font-family:'Rajdhani';font-style:normal;font-weight:700;font-display:swap;
+    src:url('/fonts/rajdhani-700.woff2') format('woff2');
+  }
+  </style>
 
   <!-- ══════════════ EmailJS (envio do formulário de contato) ══════════════ -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" defer></script>
@@ -81,7 +100,7 @@
     --danger:#f87171;
     --text:#f2f6fc;
     --muted:rgba(242,246,252,.68);
-    --faint:rgba(242,246,252,.42);
+    --faint:rgba(242,246,252,.55); /* alpha calibrado p/ WCAG AA (>=4.5:1) sobre --navy-900/--navy-950 */
     --surface:rgba(255,255,255,.05);
     --surface-2:rgba(255,255,255,.08);
     --border:rgba(255,255,255,.1);
@@ -565,7 +584,7 @@
 </head>
 <body>
 
-<a href="#hero" class="skip-link">Pular para o conteúdo</a>
+<a href="#main-content" class="skip-link">Pular para o conteúdo</a>
 
 <!-- ══════════════ 01 · HEADER ══════════════ -->
 <header id="header">
@@ -600,7 +619,7 @@
   </nav>
 </header>
 
-<main>
+<main id="main-content" tabindex="-1">
 
 <!-- ══════════════ 02 · HERO ══════════════ -->
 <section class="hero" id="hero">
